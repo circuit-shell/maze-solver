@@ -1,4 +1,4 @@
-from tkinter import Tk, BOTH, Canvas
+from tkinter import BOTH, Canvas, Tk
 
 
 class Window:
@@ -74,26 +74,32 @@ class Cell:
             line = Line(Point(x1, y2), Point(x2, y2))
             self.__win.draw_line(line)
 
+    def draw_move(self, to_cell, undo=False):
+        color = "red" if not undo else "gray"
+
+        c1 = abs(self.__x1 - self.__x2) // 2
+        c2 = abs(self.__y1 - self.__y2) // 2
+
+        t1 = abs(to_cell.__x1 - to_cell.__x2) // 2
+        t2 = abs(to_cell.__y1 - to_cell.__y2) // 2
+
+        line = Line(Point(c1, c2), Point(t1, t2))
+        self.__win.draw_line(line, fill_color=color)
+
 
 def main():
     print("Game start ...")
     win = Window(500, 500)
-    
-    c = Cell(win)
-    c.has_left_wall = False
-    c.draw(50, 50, 100, 500)
 
-    c = Cell(win)
-    c.has_right_wall = False
-    c.draw(125, 125, 200, 200)
-
-    c = Cell(win)
-    c.has_bottom_wall = False
-    c.draw(225, 225, 250, 250)
+    cell1 = Cell(win)
+    cell1.has_left_wall = False
+    cell1.draw(50, 50, 100, 500)
 
     c = Cell(win)
     c.has_top_wall = False
     c.draw(300, 300, 500, 500)
+
+    cell1.draw_move(c, undo=False)
 
     win.wait_for_close()
 
