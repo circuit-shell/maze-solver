@@ -25,6 +25,10 @@ class Maze:
 
         self.__create_cells()
 
+    
+    def get_cells(self):
+        return self.__cells  # Public accessor method
+
     def __create_cells(self):
         for i in range(self.__num_cols):
             col_cells = []
