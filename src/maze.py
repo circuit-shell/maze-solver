@@ -24,8 +24,8 @@ class Maze:
         self.__win = win
 
         self.__create_cells()
+        self.__break_entrance_and_exit()
 
-    
     def get_cells(self):
         return self.__cells  # Public accessor method
 
@@ -49,8 +49,18 @@ class Maze:
         self.__cells[i][j].draw(x1, y1, x2, y2)
         self.__animate()
 
+    def __break_entrance_and_exit(self):
+        top_left_cell = self.__cells[0][0]
+        top_left_cell.has_top_wall = False
+        rows = len(self.__cells) - 1
+        cols = len(self.__cells[0]) - 1
+        bottom_right = self.__cells[rows][cols]
+        bottom_right.has_bottom_wall = False
+        self.__draw_cell(0, 0)
+        self.__draw_cell(rows, cols)
+
     def __animate(self):
         if self.__win is None:
             return
         self.__win.redraw()
-        time.sleep(0.05)
+        time.sleep(0.005)
