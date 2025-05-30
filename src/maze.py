@@ -1,5 +1,6 @@
 import time
-from  cell import Cell
+
+from cell import Cell
 
 
 class Maze:
@@ -11,8 +12,9 @@ class Maze:
         num_cols,
         cell_size_x,
         cell_size_y,
-        win,
+        win=None,
     ):
+        self.__cells = []
         self.__x1 = x1
         self.__y1 = y1
         self.__num_rows = num_rows
@@ -20,7 +22,6 @@ class Maze:
         self.__cell_size_x = cell_size_x
         self.__cell_size_y = cell_size_y
         self.__win = win
-        self.__cells = []
 
         self.__create_cells()
 
@@ -48,6 +49,4 @@ class Maze:
         if self.__win is None:
             return
         self.__win.redraw()
-        time.sleep(0.01)
-
-
+        time.sleep(0.05)
